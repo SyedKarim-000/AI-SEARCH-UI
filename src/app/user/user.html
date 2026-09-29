@@ -1,0 +1,16 @@
+<p>user works!</p>
+
+<div *ngFor="let item of messages">
+
+  <b>{{item.role}}</b>
+
+  <p>{{item.content}}</p>
+
+</div>
+
+<input
+[(ngModel)]="userInput">
+
+<button (click)="send()">
+ Send
+</button>
