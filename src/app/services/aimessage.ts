@@ -14,7 +14,8 @@ export class AIMessage {
         'https://localhost:7100/api/chat',
         {
             message
-        }
+        },
+        { responseType: 'text' }
         );
 
     }
