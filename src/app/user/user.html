@@ -1,16 +1,53 @@
-<p>user works!</p>
+<main class="chat-page">
+  <header class="chat-header">
+    <a class="brand" routerLink="/user" aria-label="AILAB chat home">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span>AILAB</span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Chat</a>
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    </nav>
+    <span class="header-status"><span class="status-dot"></span>AI assistant</span>
+  </header>
 
-<div *ngFor="let item of messages()">
+  <section class="chat-workspace" aria-label="Chat">
+    <div class="conversation-heading">
+      <p class="eyebrow">YOUR WORKSPACE</p>
+      <h1>Let’s think it through.</h1>
+      <p class="conversation-subtitle">A clear place to explore your next idea.</p>
+    </div>
 
-  <b>{{item.role}}</b>
+    <div class="conversation" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions">
+      <div class="empty-state" *ngIf="messages().length === 0">
+        <span class="empty-mark" aria-hidden="true">✳</span>
+        <p>What would you like to work on?</p>
+      </div>
 
-  <p>{{item.content}}</p>
+      <article
+        class="message-row"
+        *ngFor="let item of messages()"
+        [class.from-user]="item.role === 'user'"
+        [class.from-assistant]="item.role !== 'user'">
+        <span class="message-role">{{ item.role === 'user' ? 'You' : 'Assistant' }}</span>
+        <p class="message-bubble">{{ item.content }}</p>
+      </article>
+    </div>
 
-</div>
-
-<input
-[(ngModel)]="userInput">
-
-<button (click)="send()">
- Send
-</button>
+    <form class="composer" (ngSubmit)="send()">
+      <label class="visually-hidden" for="message-input">Your message</label>
+      <input
+        id="message-input"
+        name="message"
+        type="text"
+        [(ngModel)]="userInput"
+        placeholder="Write a message..."
+        autocomplete="off">
+      <button type="submit" aria-label="Send message">
+        <span>Send</span>
+        <span class="send-arrow" aria-hidden="true"></span>
+      </button>
+    </form>
+    <p class="composer-note">Responses can be imperfect. Check important details.</p>
+  </section>
+</main>
