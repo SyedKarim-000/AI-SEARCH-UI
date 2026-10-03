@@ -1,2 +1,15 @@
 
-<router-outlet />
+<main class="chat-page">
+	<header class="chat-header">
+		<a class="brand" routerLink="/user" aria-label="AILAB chat home">
+			<span class="brand-mark" aria-hidden="true">A</span>
+			<span>AILAB</span>
+		</a>
+		<nav class="primary-nav" aria-label="Primary navigation">
+			<a routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Chat</a>
+			<a routerLink="/admin" routerLinkActive="active">Admin</a>
+		</nav>
+		<span class="header-status"><span class="status-dot"></span>AI assistant</span>
+	</header>
+	<router-outlet />
+</main>
